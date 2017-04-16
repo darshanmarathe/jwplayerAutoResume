@@ -6,7 +6,7 @@ var db = new loki("fireApp",   {
         autoload: true,
         autoloadCallback : loadHandler,
         autosave: true, 
-        autosaveInterval: 10000, // 10 seconds
+        autosaveInterval: 250, // 10 seconds
         adapter: idbAdapter
       });
 
@@ -25,9 +25,10 @@ function loadHandler() {
 
 // Setup the player
 const player = jwplayer('player').setup({
-    file: '/assets/sample.mp4',
+    file: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
     volume: 10
 });
+
 
 // Listen to an event
 player.on('pause', (event) => {
@@ -38,6 +39,7 @@ player.on('pause', (event) => {
         name: file,
         position: position
     });
+    console.log(videos.find({name : file}));
 });
 
 
@@ -49,8 +51,19 @@ player.on('play', (event) => {
    
    console.log("file =>" + file)
     currentvideo = videos.find({name : file})[0];
+    setTimeout(function(){
+        DeleteOldData(videos.find({name : file}));
+    },2000)
+    console.log(currentvideo);
     player.seek(currentvideo.position);
 });
+
+function DeleteOldData(collection){
+    for (var index = 1; index < collection.length; index++) {
+        var element = collection[index];
+        videos.remove(element);
+    }
+}
 
 // Call the API
 const bumpIt = () => {
