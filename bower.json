@@ -1,0 +1,21 @@
+{
+  "name": "jwplayerAutoResume",
+  "homepage": "https://github.com/darshanmarathe/jwplayerAutoResume",
+  "authors": [
+    "aditimarathe2015 <aditimarathe1@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jwplayer": "^6.12.4956"
+  }
+}
